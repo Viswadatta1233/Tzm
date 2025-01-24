@@ -77,11 +77,11 @@ exports.loginUser = async (req, res) => {
         // Generate a token
         const token = generateToken(user._id);
 
-        // Set token in a cookie
-        res.cookie(process.env.COOKIE_NAME, token, {
-            httpOnly: true,
-            maxAge: 3600000, // 1 hour
-        });
+        // // Set token in a cookie
+        // res.cookie(process.env.COOKIE_NAME, token, {
+        //     httpOnly: true,
+        //     maxAge: 3600000, // 1 hour
+        // });
 
         res.status(200).json({ message: 'Login successful', token, role: user.role });
     } catch (error) {

@@ -3,7 +3,7 @@ const User = require('../models/User');
 
 exports.authenticate = async (req, res, next) => {
     
-    const token = req.cookies[process.env.COOKIE_NAME] || req.headers.authorization?.split(" ")[1];
+    const token = req.headers.authorization?.split(" ")[1];
     console.log(token);
     console.log("t2");
     if (!token) {
