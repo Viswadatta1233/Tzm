@@ -2,18 +2,18 @@
 const express = require('express');
 const router = express.Router();
 const { createCoreTeam, getCoreTeam, updateCoreTeam, deleteCoreTeam } = require('../controllers/coreTeamController');
-const { authenticate } = require('../middleware/authMiddleware');
+// const { authenticate } = require('../middleware/authMiddleware');
 
 // Create a new core team member
-router.post('/', authenticate, createCoreTeam);
+router.post('/', createCoreTeam);
 
 // Get all core team members
-router.get('/', authenticate, getCoreTeam);
+router.get('/',getCoreTeam);
 
 // Update a core team member
-router.put('/:id', authenticate, updateCoreTeam);
+router.put('/:id', updateCoreTeam);
 
 // Delete a core team member
-router.delete('/:id', authenticate, deleteCoreTeam);
+router.delete('/:id', deleteCoreTeam);
 
 module.exports = router;
