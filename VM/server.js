@@ -17,7 +17,7 @@ const app = express();
 // Enable CORS for all origins
 app.use(cors({
     origin: '*', // Allow all origins
-    // credentials: true, // Allow credentials (cookies, etc.)
+    // git // Allow credentials (cookies, etc.)
 }));
 
 // Middleware for parsing JSON and cookies
@@ -29,6 +29,7 @@ app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/stalls', require('./routes/stallRoutes'));
 app.use('/api/teams', require('./routes/teamRoutes'));
 app.use('/api/sponsors', require('./routes/sponsorRoutes'));
+app.use('/api/coreteam', require('./routes/coreTeamRoutes'));
 
 // Start the server
 const PORT = process.env.PORT || 5000;

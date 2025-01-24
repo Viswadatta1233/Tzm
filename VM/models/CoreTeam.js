@@ -1,7 +1,6 @@
-// Team Model
 const mongoose = require('mongoose');
 
-const teamSchema = new mongoose.Schema({
+const coreTeamSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -14,11 +13,6 @@ const teamSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    priority: {
-        type: Number,
-        required: true,
-        default: 0, // Optional: default value for priority
-    },
 }, { timestamps: true });
 
-module.exports = mongoose.model('Team', teamSchema);
+module.exports = mongoose.model('CoreTeam', coreTeamSchema);
