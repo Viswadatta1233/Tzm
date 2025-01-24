@@ -17,7 +17,7 @@ const app = express();
 // Enable CORS for all origins
 app.use(cors({
     origin: '*', // Allow all origins
-    credentials: true, // Allow credentials (cookies, etc.)
+    // credentials: true, // Allow credentials (cookies, etc.)
 }));
 
 // Middleware for parsing JSON and cookies
