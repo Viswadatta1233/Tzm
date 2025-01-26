@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-
+const messageRoutes = require('./routes/messageRoutes');
 // Load environment variables
 dotenv.config();
 
@@ -30,6 +30,7 @@ app.use('/api/stalls', require('./routes/stallRoutes'));
 app.use('/api/teams', require('./routes/teamRoutes'));
 app.use('/api/sponsors', require('./routes/sponsorRoutes'));
 app.use('/api/coreteam', require('./routes/coreTeamRoutes'));
+app.use('/api/messages', messageRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 5000;
