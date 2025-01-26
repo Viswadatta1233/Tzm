@@ -7,6 +7,6 @@ const router = express.Router();
 router.post('/submit', authenticate,submitMessage);
 
 // Route to get all messages (only accessible by admins)
-router.get('/',authenticate, getAllMessages);
+router.get('/', getAllMessages);
 
 module.exports = router;
