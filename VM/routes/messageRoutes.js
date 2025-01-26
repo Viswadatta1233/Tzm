@@ -4,7 +4,7 @@ const { authenticate } = require('../middlewares/authMiddleware');
 const router = express.Router();
 
 // Route to submit a message
-router.post('/submit', submitMessage);
+router.post('/submit', authenticate,submitMessage);
 
 // Route to get all messages (only accessible by admins)
 router.get('/',authenticate, getAllMessages);
