@@ -119,7 +119,7 @@ exports.uploadPhoto = async (req, res) => {
 exports.viewVolunteers = async (req, res) => {
     try {
         // Fetch all users with the role of 'Volunteer'
-        const volunteers = await User.find({ role: 'Volunteer' }); // Exclude passwords from response
+        const volunteers = await User.find({ role: 'Volunteer' }); 
 
         if (volunteers.length === 0) {
             return res.status(404).json({ message: 'No volunteers found' });
