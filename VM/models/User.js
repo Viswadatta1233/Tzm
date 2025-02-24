@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
     role: { type: String, enum: ['Volunteer', 'Core Team', 'Admin'], required: true },
     photo: { type: String ,default:''},
     creditScore: { type: Number, default: 0 },
+    original:{ type: String}
 });
 
 module.exports = mongoose.model('User', userSchema);

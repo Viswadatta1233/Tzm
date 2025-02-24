@@ -44,6 +44,7 @@ exports.addUser = async (req, res) => {
             phone,
             club,
             role,
+            original:password
         });
         
         
