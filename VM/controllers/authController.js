@@ -25,6 +25,7 @@ exports.addUser = async (req, res) => {
         const tzId = `TZ25V${Date.now() % 100000}`; // Timestamp-based ID to ensure uniqueness
         // Generate unique tzId
         const password = generatePassword(); 
+        const original=password;
         console.log(password);// Generate a password
         const hashedPassword = await bcrypt.hash(password, 10); // Hash the password
 
@@ -44,7 +45,7 @@ exports.addUser = async (req, res) => {
             phone,
             club,
             role,
-            original:password
+            original
         });
         
         
