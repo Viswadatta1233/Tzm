@@ -118,7 +118,7 @@ exports.uploadPhoto = async (req, res) => {
 exports.viewVolunteers = async (req, res) => {
     try {
         // Fetch all users with the role of 'Volunteer'
-        const volunteers = await User.find({ role: 'Volunteer' }).select('-password'); // Exclude passwords from response
+        const volunteers = await User.find({ role: 'Volunteer' }); // Exclude passwords from response
 
         if (volunteers.length === 0) {
             return res.status(404).json({ message: 'No volunteers found' });
@@ -133,5 +133,45 @@ exports.viewVolunteers = async (req, res) => {
         res.status(500).json({ message: 'Server error', error: error.message });
     }
 };
+exports.updateVolunteer = async (req, res) => {
+    try {
+        const { tzId } = req.params;
+        const updates = req.body; // Fields to update
 
-//password added
+        // Find and update the volunteer
+        const updatedVolunteer = await User.findOneAndUpdate(
+            { tzId, role: 'Volunteer' },
+            updates,
+            { new: true, runValidators: true } // Return the updated document
+        ).select('-password'); // Exclude password from response
+
+        if (!updatedVolunteer) {
+            return res.status(404).json({ message: 'Volunteer not found' });
+        }
+
+        res.status(200).json({
+            message: 'Volunteer updated successfully',
+            volunteer: updatedVolunteer,
+        });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error: error.message });
+    }
+};
+exports.deleteVolunteer = async (req, res) => {
+    try {
+        const { tzId } = req.params;
+
+        // Find and delete the volunteer
+        const deletedVolunteer = await User.findOneAndDelete({ tzId, role: 'Volunteer' });
+
+        if (!deletedVolunteer) {
+            return res.status(404).json({ message: 'Volunteer not found' });
+        }
+
+        res.status(200).json({ message: 'Volunteer deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error: error.message });
+    }
+};
+
+                                            
