@@ -11,7 +11,7 @@ router.post('/login', loginUser);
 router.post('/logout', authenticate, logoutUser);
 router.post('/upload-photo', authenticate, upload.single('photo'), uploadPhoto);
 router.get('/volunteers', authenticate,isAuthorized,viewVolunteers);
-router.put('/volunteers/:tzId', volunteerController.updateVolunteer);
-router.delete('/volunteers/:tzId', volunteerController.deleteVolunteer);
+router.put('/volunteers/:tzId', updateVolunteer);
+router.delete('/volunteers/:tzId',deleteVolunteer);
 
 module.exports = router;
