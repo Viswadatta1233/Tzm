@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema({
     tzId: { type: String, unique: true, required: true },
     password: { type: String, required: true },
     name: { type: String, required: true }, // Added name field
-    branch: { type: String},
+    branch: { type: String,default:''},
     year: { type: Number, required: true },
     phone: { type: String},
     club: { type: String},

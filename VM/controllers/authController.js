@@ -20,20 +20,25 @@ const generatePassword = () => {
 // Add a new user (only for admins)
 exports.addUser = async (req, res) => {
     const { name, branch, year, phone, club, role } = req.body;
-    console.log(req.body); // Include name in destructuring
-    try {
-        const tzId = `TZ25V${Date.now() % 100000}`; // Timestamp-based ID to ensure uniqueness
-        // Generate unique tzId
-        const password = generatePassword(); 
-        const original=password;
-        console.log(password);// Generate a password
-        const hashedPassword = await bcrypt.hash(password, 10); // Hash the password
+    console.log(req.body); 
 
-        // Extract numeric part from year (e.g., "E2" -> 2)
-        const numericYear = parseInt(year.match(/\d+/)?.[0]); // This will extract the numeric part
+    try {
+        const tzId = `TZ25V${Date.now() % 100000}`; // Generate unique tzId
+        const password = generatePassword(); 
+        const original = password;
+        console.log(password); 
+        const hashedPassword = await bcrypt.hash(password, 10); 
+
+        // Ensure year is stored as a number
+        let numericYear;
+        if (typeof year === "number") {
+            numericYear = year; // Directly use if it's a number
+        } else if (typeof year === "string") {
+            numericYear = parseInt(year.match(/\d+/)?.[0]); // Extract number if it's a string
+        }
 
         if (isNaN(numericYear)) {
-            return res.status(400).json({ message: "Invalid year format. Year should contain a number." });
+            return res.status(400).json({ message: "Invalid year format. Year should be a number." });
         }
 
         const user = new User({
@@ -41,28 +46,26 @@ exports.addUser = async (req, res) => {
             name,
             password: hashedPassword,
             branch,
-            year: numericYear, // Store the numeric value of year
+            year: numericYear, // Store as number
             phone,
             club,
             role,
             original
         });
-        
-        
 
+        console.log(user);
         await user.save();
-        // c  // console.log(password);onsole.log("saved");
-      
 
         res.status(201).json({
             message: 'User added successfully',
             tzId,
-            password: `Generated password is: ${password}`, // Provide the generated password
+            password: `Generated password is: ${password}`,
         });
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
     }
 };
+
 
 
 // Login user and set JWT in cookie
