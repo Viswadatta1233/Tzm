@@ -19,15 +19,15 @@ const generatePassword = () => {
 // Add a new user (only for admins)
 // Add a new user (only for admins)
 exports.addUser = async (req, res) => {
-    const { name, branch, year, phone, club, role } = req.body;
-    console.log(req.body); 
+    const { name, branch, year, phone, club, role, photo } = req.body;
+    console.log(req.body);
 
     try {
         const tzId = `TZ25V${Date.now() % 100000}`; // Generate unique tzId
         const password = generatePassword(); 
         const original = password;
         console.log(password); 
-        const hashedPassword = await bcrypt.hash(password, 10); 
+        const hashedPassword = await bcrypt.hash(password, 10);
 
         // Ensure year is stored as a number
         let numericYear;
@@ -50,6 +50,7 @@ exports.addUser = async (req, res) => {
             phone,
             club,
             role,
+            photo, // Save photo URL from request
             original
         });
 
@@ -65,7 +66,6 @@ exports.addUser = async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 };
-
 
 
 // Login user and set JWT in cookie
